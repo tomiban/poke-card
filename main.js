@@ -3,7 +3,7 @@ const pokeName = document.querySelector('[data-poke-name]');
 const pokeImg = document.querySelector('[data-poke-img]');
 const pokeImgContainer = document.querySelector('[data-poke-img-container]');
 const pokeTypes = document.querySelector('[data-poke-types]');
-const pokeId = document.querySelector('[data-poke-types]')
+const pokeId = document.querySelector('[data-poke-id]')
 const pokeStats = document.querySelector('[data-poke-stats]');
 
 
@@ -43,6 +43,26 @@ const renderPokemon = data => {
     pokeName.textContent = data.name;
     pokeId.textContent = `N° ${data.id}`;
     pokeImg.setAttribute('src', sprite);
-    
 
+    setCardColor(types);
+    renderPokemonTypes(types);
+}
+
+const setCardColor = types => {
+    const colorOne = typeColors[types[0].type.name]; // accede a la propiedad type del objeto y lo mecha con el color del diccionario
+    const colorTwo = types[1] ? typeColors[types[1].type.name] : typeColors.default; //agrega color 2 si es que existe sino pone el color x default
+
+    pokeImg.style.background = `radial-gradient(${colorTwo} 33%, ${colorOne} 33%)`;
+    pokeImg.style.backgroundSize = '5px 5px';
+}
+
+
+const renderPokemonTypes = types => {
+    pokeTypes.innerHTML = ''; //borra el contenido
+    types.forEach(type => {
+        const typeTextElement = document.createElement("div");
+        typeTextElement.style.color = typeColors[type.type.name];
+        typeTextElement.textContent = type.type.name;
+        pokeTypes.appendChild(typeTextElement);
+    });
 }
