@@ -1,3 +1,4 @@
 # pokedex
-<p>Consumiendo datos con fetchAPI </p>
+<p align="center"> <br>
 <img src='./img.png'>
+ </p>
